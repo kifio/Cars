@@ -3,27 +3,69 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		C04C3C8524DD357A00F7C52B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3C8424DD357A00F7C52B /* AppDelegate.swift */; };
-		C04C3C8724DD357A00F7C52B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3C8624DD357A00F7C52B /* SceneDelegate.swift */; };
-		C04C3C8924DD357A00F7C52B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3C8824DD357A00F7C52B /* ViewController.swift */; };
-		C04C3C8C24DD357A00F7C52B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C04C3C8A24DD357A00F7C52B /* Main.storyboard */; };
+		C04C3C8924DD357A00F7C52B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3C8824DD357A00F7C52B /* MapViewController.swift */; };
 		C04C3C8E24DD358100F7C52B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C04C3C8D24DD358100F7C52B /* Assets.xcassets */; };
 		C04C3C9124DD358100F7C52B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C04C3C8F24DD358100F7C52B /* LaunchScreen.storyboard */; };
+		C04C3CA024DD3FBB00F7C52B /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C04C3C9C24DD3FA600F7C52B /* Mapbox.framework */; };
+		C04C3CA124DD3FBB00F7C52B /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C04C3C9C24DD3FA600F7C52B /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C04C3CA324DD3FBC00F7C52B /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C04C3C9D24DD3FA600F7C52B /* MapboxMobileEvents.framework */; };
+		C04C3CA424DD3FBC00F7C52B /* MapboxMobileEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C04C3C9D24DD3FA600F7C52B /* MapboxMobileEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C04C3CA624DD4BB200F7C52B /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CA524DD4BB200F7C52B /* MapPresenter.swift */; };
+		C04C3CA824DD608F00F7C52B /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CA724DD608F00F7C52B /* Repository.swift */; };
+		C04C3CAD24DD6A1000F7C52B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C04C3CAC24DD6A1000F7C52B /* Alamofire */; };
+		C04C3CAF24DD6F9000F7C52B /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CAE24DD6F9000F7C52B /* CoreDataStack.swift */; };
+		C04C3CB324DD73FC00F7C52B /* Cars.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CB124DD73FC00F7C52B /* Cars.xcdatamodeld */; };
+		C04C3CBA24DD787D00F7C52B /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CB924DD787D00F7C52B /* Cache.swift */; };
+		C04C3CBC24DD792300F7C52B /* Cars.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CBB24DD792300F7C52B /* Cars.swift */; };
+		C04C3CBF24DD7BBA00F7C52B /* CacheLifeTimeEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CBD24DD7BBA00F7C52B /* CacheLifeTimeEntity+CoreDataClass.swift */; };
+		C04C3CC024DD7BBA00F7C52B /* CacheLifeTimeEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CBE24DD7BBA00F7C52B /* CacheLifeTimeEntity+CoreDataProperties.swift */; };
+		C04C3CC224DD956F00F7C52B /* MapInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CC124DD956F00F7C52B /* MapInteractor.swift */; };
+		C04C3CC424DD9D1E00F7C52B /* MapRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CC324DD9D1E00F7C52B /* MapRouter.swift */; };
+		C04C3CCF24DDA49A00F7C52B /* CarEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CCD24DDA49A00F7C52B /* CarEntity+CoreDataClass.swift */; };
+		C04C3CD024DDA49A00F7C52B /* CarEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CCE24DDA49A00F7C52B /* CarEntity+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C04C3CA224DD3FBB00F7C52B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C04C3CA424DD3FBC00F7C52B /* MapboxMobileEvents.framework in Embed Frameworks */,
+				C04C3CA124DD3FBB00F7C52B /* Mapbox.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C04C3C8124DD357A00F7C52B /* Cars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C04C3C8424DD357A00F7C52B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C04C3C8624DD357A00F7C52B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C04C3C8824DD357A00F7C52B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C04C3C8B24DD357A00F7C52B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C04C3C8824DD357A00F7C52B /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		C04C3C8D24DD358100F7C52B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C04C3C9024DD358100F7C52B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C04C3C9224DD358100F7C52B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C04C3C9C24DD3FA600F7C52B /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Mapbox.framework; sourceTree = "<group>"; };
+		C04C3C9D24DD3FA600F7C52B /* MapboxMobileEvents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MapboxMobileEvents.framework; sourceTree = "<group>"; };
+		C04C3CA524DD4BB200F7C52B /* MapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
+		C04C3CA724DD608F00F7C52B /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		C04C3CAE24DD6F9000F7C52B /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		C04C3CB224DD73FC00F7C52B /* Cars.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cars.xcdatamodel; sourceTree = "<group>"; };
+		C04C3CB924DD787D00F7C52B /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		C04C3CBB24DD792300F7C52B /* Cars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cars.swift; sourceTree = "<group>"; };
+		C04C3CBD24DD7BBA00F7C52B /* CacheLifeTimeEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CacheLifeTimeEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C04C3CBE24DD7BBA00F7C52B /* CacheLifeTimeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CacheLifeTimeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C04C3CC124DD956F00F7C52B /* MapInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInteractor.swift; sourceTree = "<group>"; };
+		C04C3CC324DD9D1E00F7C52B /* MapRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouter.swift; sourceTree = "<group>"; };
+		C04C3CCD24DDA49A00F7C52B /* CarEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C04C3CCE24DDA49A00F7C52B /* CarEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +73,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C04C3CAD24DD6A1000F7C52B /* Alamofire in Frameworks */,
+				C04C3CA324DD3FBC00F7C52B /* MapboxMobileEvents.framework in Frameworks */,
+				C04C3CA024DD3FBB00F7C52B /* Mapbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +101,67 @@
 		C04C3C8324DD357A00F7C52B /* Cars */ = {
 			isa = PBXGroup;
 			children = (
-				C04C3C8424DD357A00F7C52B /* AppDelegate.swift */,
-				C04C3C8624DD357A00F7C52B /* SceneDelegate.swift */,
-				C04C3C8824DD357A00F7C52B /* ViewController.swift */,
-				C04C3C8A24DD357A00F7C52B /* Main.storyboard */,
-				C04C3C8D24DD358100F7C52B /* Assets.xcassets */,
-				C04C3C8F24DD358100F7C52B /* LaunchScreen.storyboard */,
 				C04C3C9224DD358100F7C52B /* Info.plist */,
+				C04C3CB024DD73E600F7C52B /* SupportFiles */,
+				C04C3C9B24DD3F6A00F7C52B /* ThirdParty */,
+				C04C3C9924DD3F5B00F7C52B /* Common */,
+				C04C3C9824DD3C5E00F7C52B /* Map */,
 			);
 			path = Cars;
+			sourceTree = "<group>";
+		};
+		C04C3C9824DD3C5E00F7C52B /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				C04C3C8824DD357A00F7C52B /* MapViewController.swift */,
+				C04C3CA524DD4BB200F7C52B /* MapPresenter.swift */,
+				C04C3CC124DD956F00F7C52B /* MapInteractor.swift */,
+				C04C3CC324DD9D1E00F7C52B /* MapRouter.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		C04C3C9924DD3F5B00F7C52B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C04C3CB824DD75C700F7C52B /* Cache */,
+				C04C3C8424DD357A00F7C52B /* AppDelegate.swift */,
+				C04C3CA724DD608F00F7C52B /* Repository.swift */,
+				C04C3CBB24DD792300F7C52B /* Cars.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		C04C3C9B24DD3F6A00F7C52B /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				C04C3C9C24DD3FA600F7C52B /* Mapbox.framework */,
+				C04C3C9D24DD3FA600F7C52B /* MapboxMobileEvents.framework */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		C04C3CB024DD73E600F7C52B /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C04C3C8F24DD358100F7C52B /* LaunchScreen.storyboard */,
+				C04C3C8D24DD358100F7C52B /* Assets.xcassets */,
+				C04C3CB124DD73FC00F7C52B /* Cars.xcdatamodeld */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		C04C3CB824DD75C700F7C52B /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				C04C3CCD24DDA49A00F7C52B /* CarEntity+CoreDataClass.swift */,
+				C04C3CCE24DDA49A00F7C52B /* CarEntity+CoreDataProperties.swift */,
+				C04C3CBD24DD7BBA00F7C52B /* CacheLifeTimeEntity+CoreDataClass.swift */,
+				C04C3CBE24DD7BBA00F7C52B /* CacheLifeTimeEntity+CoreDataProperties.swift */,
+				C04C3CAE24DD6F9000F7C52B /* CoreDataStack.swift */,
+				C04C3CB924DD787D00F7C52B /* Cache.swift */,
+			);
+			path = Cache;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,12 +174,16 @@
 				C04C3C7D24DD357A00F7C52B /* Sources */,
 				C04C3C7E24DD357A00F7C52B /* Frameworks */,
 				C04C3C7F24DD357A00F7C52B /* Resources */,
+				C04C3CA224DD3FBB00F7C52B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Cars;
+			packageProductDependencies = (
+				C04C3CAC24DD6A1000F7C52B /* Alamofire */,
+			);
 			productName = Cars;
 			productReference = C04C3C8124DD357A00F7C52B /* Cars.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +212,9 @@
 				Base,
 			);
 			mainGroup = C04C3C7824DD357A00F7C52B;
+			packageReferences = (
+				C04C3CAB24DD6A1000F7C52B /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = C04C3C8224DD357A00F7C52B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +231,6 @@
 			files = (
 				C04C3C9124DD358100F7C52B /* LaunchScreen.storyboard in Resources */,
 				C04C3C8E24DD358100F7C52B /* Assets.xcassets in Resources */,
-				C04C3C8C24DD357A00F7C52B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +241,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C04C3C8924DD357A00F7C52B /* ViewController.swift in Sources */,
+				C04C3C8924DD357A00F7C52B /* MapViewController.swift in Sources */,
 				C04C3C8524DD357A00F7C52B /* AppDelegate.swift in Sources */,
-				C04C3C8724DD357A00F7C52B /* SceneDelegate.swift in Sources */,
+				C04C3CBF24DD7BBA00F7C52B /* CacheLifeTimeEntity+CoreDataClass.swift in Sources */,
+				C04C3CBC24DD792300F7C52B /* Cars.swift in Sources */,
+				C04C3CBA24DD787D00F7C52B /* Cache.swift in Sources */,
+				C04C3CB324DD73FC00F7C52B /* Cars.xcdatamodeld in Sources */,
+				C04C3CC224DD956F00F7C52B /* MapInteractor.swift in Sources */,
+				C04C3CA624DD4BB200F7C52B /* MapPresenter.swift in Sources */,
+				C04C3CCF24DDA49A00F7C52B /* CarEntity+CoreDataClass.swift in Sources */,
+				C04C3CD024DDA49A00F7C52B /* CarEntity+CoreDataProperties.swift in Sources */,
+				C04C3CAF24DD6F9000F7C52B /* CoreDataStack.swift in Sources */,
+				C04C3CA824DD608F00F7C52B /* Repository.swift in Sources */,
+				C04C3CC424DD9D1E00F7C52B /* MapRouter.swift in Sources */,
+				C04C3CC024DD7BBA00F7C52B /* CacheLifeTimeEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C04C3C8A24DD357A00F7C52B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C04C3C8B24DD357A00F7C52B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C04C3C8F24DD358100F7C52B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -286,7 +392,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SU33AJBF5T;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Cars/ThirdParty",
+				);
 				INFOPLIST_FILE = Cars/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,7 +415,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SU33AJBF5T;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Cars/ThirdParty",
+				);
 				INFOPLIST_FILE = Cars/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -338,6 +454,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C04C3CAB24DD6A1000F7C52B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C04C3CAC24DD6A1000F7C52B /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C04C3CAB24DD6A1000F7C52B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		C04C3CB124DD73FC00F7C52B /* Cars.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C04C3CB224DD73FC00F7C52B /* Cars.xcdatamodel */,
+			);
+			currentVersion = C04C3CB224DD73FC00F7C52B /* Cars.xcdatamodel */;
+			path = Cars.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C04C3C7924DD357A00F7C52B /* Project object */;
 }
