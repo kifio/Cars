@@ -14,7 +14,12 @@ class MapViewController: UIViewController {
     static let initialZoomLevel = 9.0
     
     private var updating: Bool = false
+    
+    private var mapView: MGLMapView!
+    private var userLocation: MGLUserLocation?
     private let presenter: MapPresenter
+    
+    private let polylineController = PolyLineController()
     
     init(presenter: MapPresenter) {
         self.presenter = presenter
@@ -27,16 +32,86 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupMapView()
+        self.setupMapView()
     }
     
     private func setupMapView() {
-        let mapView = MGLMapView(frame: view.bounds)
-        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mapView.showsUserLocation = true
-        mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
-        mapView.delegate = self
+        self.mapView = MGLMapView(frame: view.bounds)
+        self.mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.mapView.showsUserLocation = true
+        self.mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
+        self.mapView.delegate = self
         view.addSubview(mapView)
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleMapTap(sender:)))
+        
+        for recognizer in mapView.gestureRecognizers! where recognizer is UITapGestureRecognizer {
+            singleTap.require(toFail: recognizer)
+        }
+        
+        mapView.addGestureRecognizer(singleTap)
+    }
+}
+
+// MARK: Polyline
+extension MapViewController {
+    
+    @objc func handleMapTap(sender: UITapGestureRecognizer) {
+        // Get the CGPoint where the user tapped.
+        let spot = sender.location(in: mapView)
+        
+        // Access the features at that point within the state layer.
+        let features = mapView.visibleFeatures(at: spot, styleLayerIdentifiers: Set([Constants.layer]))
+        
+        // Get the name of the selected state.
+        if let feature = features.first, let userLocation = self.userLocation?.location {
+            self.presenter.showRoute(
+                fromLon: userLocation.coordinate.longitude,
+                fromLat: userLocation.coordinate.latitude,
+                toLon: feature.coordinate.longitude,
+                toLat: feature.coordinate.latitude,
+                completion: { [weak self] routeViewModel in
+                    guard let style = self?.mapView.style else { return }
+                    self?.animateCamera(polyline: routeViewModel.polyline)
+                    DispatchQueue.main.async(execute: {
+                        self?.polylineController.lineCoordinates = routeViewModel.polyline
+                        self?.polylineController.addPolyline(to: style)
+                        self?.polylineController.animatePolyline()
+                    })
+            })
+        }
+    }
+    
+    private func animateCamera(polyline: [CLLocationCoordinate2D]) {
+        if let south = polyline.min(by: { (loc0, loc1) -> Bool in
+            return loc0.latitude < loc1.latitude
+        })?.latitude,
+            
+            let west = polyline.min(by: { (loc0, loc1) -> Bool in
+                return loc0.longitude < loc1.longitude
+            })?.longitude,
+            
+            let north = polyline.max(by: { (loc0, loc1) -> Bool in
+                return loc0.latitude < loc1.latitude
+            })?.latitude,
+            
+            let east = polyline.max(by: { (loc0, loc1) -> Bool in
+                return loc0.longitude < loc1.longitude
+            })?.longitude {
+            
+            
+            let bounds: MGLCoordinateBounds = MGLCoordinateBounds(
+                sw: CLLocationCoordinate2D(latitude: south, longitude: west),
+                ne: CLLocationCoordinate2D(latitude: north, longitude: east))
+            
+            let inset: CGFloat = 24.0
+            let padding = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+            
+            DispatchQueue.main.async(execute: {
+                let camera = self.mapView.cameraThatFitsCoordinateBounds(bounds, edgePadding: padding)
+                self.mapView.setCamera(camera, animated: true)
+            })
+        }
     }
 }
 
@@ -65,6 +140,10 @@ extension MapViewController: MGLMapViewDelegate {
                     }
             })
         }
+    }
+    
+    func mapView(_ mapView: MGLMapView, didUpdate userLocation: MGLUserLocation?) {
+        self.userLocation = userLocation
     }
 }
 

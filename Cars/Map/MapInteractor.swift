@@ -16,6 +16,14 @@ protocol MapInteractor {
         bottom: Double,
         completion: @escaping ([Car]) -> Void
     )
+    
+    func getRoute(
+        fromLon: Double,
+        fromLat: Double,
+        toLon: Double,
+        toLat: Double,
+        completion: @escaping (Route) -> Void
+    )
 }
 
 class MapInteractorImpl: MapInteractor {
@@ -39,12 +47,22 @@ class MapInteractorImpl: MapInteractor {
         })
     }
     
+    func getRoute(
+        fromLon: Double,
+        fromLat: Double,
+        toLon: Double,
+        toLat: Double,
+        completion: @escaping (Route) -> Void) {
+        self.repository.fetchRoute(
+            from: (fromLon, fromLat),
+            to: (toLon, toLat),
+            onRouteFounded: completion)
+    }
+    
     private func fetchCars() {
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.repository.fetchCars(onCarsFetched: { [weak self] cars in
-                self?.cars.append(contentsOf: cars)
-            })
-        }
+        self.repository.fetchCars(onCarsFetched: { [weak self] cars in
+            self?.cars.append(contentsOf: cars)
+        })
     }
 }
 

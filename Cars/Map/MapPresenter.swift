@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Polyline
+import CoreLocation
 
 protocol MapPresenter {
     func showCars(
@@ -15,7 +17,14 @@ protocol MapPresenter {
         right: Double,
         bottom: Double,
         completion: @escaping ([CarViewModel]) -> Void)
-    func showRoute()
+    
+    func showRoute(
+        fromLon: Double,
+        fromLat: Double,
+        toLon: Double,
+        toLat: Double,
+        completion: @escaping (RouteViewModel) -> Void)
+    
     func showDetails()
 }
 
@@ -33,6 +42,10 @@ struct CarViewModel {
     }
 }
 
+struct RouteViewModel {
+    let polyline: [CLLocationCoordinate2D]
+}
+
 class MapPresenterImpl: MapPresenter {
     
     let interactor: MapInteractor
@@ -43,11 +56,13 @@ class MapPresenterImpl: MapPresenter {
         self.router = router
     }
     
-    func showCars(left: Double,
-                  top: Double,
-                  right: Double,
-                  bottom: Double,
-                  completion: @escaping ([CarViewModel]) -> Void) {
+    func showCars(
+        left: Double,
+        top: Double,
+        right: Double,
+        bottom: Double,
+        completion: @escaping ([CarViewModel]) -> Void
+    ) {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             self?.interactor.getCars(
                 left: left,
@@ -58,11 +73,30 @@ class MapPresenterImpl: MapPresenter {
                 completion(cars.map { CarViewModel(car: $0) })
             }
         }
-        
     }
     
-    func showRoute() {
-        
+    func showRoute(
+        fromLon: Double,
+        fromLat: Double,
+        toLon: Double,
+        toLat: Double,
+        completion: @escaping (RouteViewModel) -> Void
+    ) {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.interactor.getRoute(
+                fromLon: fromLon,
+                fromLat: fromLat,
+                toLon: toLon,
+                toLat: toLat
+            ) { route in
+                let polyline = Polyline(encodedPolyline: route.geometry)
+                if let decodedLocations = polyline.locations {
+                    completion(RouteViewModel(polyline: decodedLocations.map {
+                        $0.coordinate
+                    }))
+                }
+            }
+        }
     }
     
     func showDetails() {

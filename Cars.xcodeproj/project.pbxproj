@@ -28,6 +28,9 @@
 		C04C3CC424DD9D1E00F7C52B /* MapRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CC324DD9D1E00F7C52B /* MapRouter.swift */; };
 		C04C3CCF24DDA49A00F7C52B /* CarEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CCD24DDA49A00F7C52B /* CarEntity+CoreDataClass.swift */; };
 		C04C3CD024DDA49A00F7C52B /* CarEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CCE24DDA49A00F7C52B /* CarEntity+CoreDataProperties.swift */; };
+		C04C3CD324DDC6F400F7C52B /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CD224DDC6F400F7C52B /* Route.swift */; };
+		C04C3CD524DDD14600F7C52B /* PolylineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3CD424DDD14600F7C52B /* PolylineController.swift */; };
+		C04C3CD824DDD30F00F7C52B /* Polyline in Frameworks */ = {isa = PBXBuildFile; productRef = C04C3CD724DDD30F00F7C52B /* Polyline */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,6 +69,8 @@
 		C04C3CC324DD9D1E00F7C52B /* MapRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouter.swift; sourceTree = "<group>"; };
 		C04C3CCD24DDA49A00F7C52B /* CarEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C04C3CCE24DDA49A00F7C52B /* CarEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C04C3CD224DDC6F400F7C52B /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		C04C3CD424DDD14600F7C52B /* PolylineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolylineController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C04C3CD824DDD30F00F7C52B /* Polyline in Frameworks */,
 				C04C3CAD24DD6A1000F7C52B /* Alamofire in Frameworks */,
 				C04C3CA324DD3FBC00F7C52B /* MapboxMobileEvents.framework in Frameworks */,
 				C04C3CA024DD3FBB00F7C52B /* Mapbox.framework in Frameworks */,
@@ -117,6 +123,7 @@
 				C04C3CA524DD4BB200F7C52B /* MapPresenter.swift */,
 				C04C3CC124DD956F00F7C52B /* MapInteractor.swift */,
 				C04C3CC324DD9D1E00F7C52B /* MapRouter.swift */,
+				C04C3CD424DDD14600F7C52B /* PolylineController.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -124,10 +131,10 @@
 		C04C3C9924DD3F5B00F7C52B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				C04C3CD124DDC6DF00F7C52B /* Model */,
 				C04C3CB824DD75C700F7C52B /* Cache */,
 				C04C3C8424DD357A00F7C52B /* AppDelegate.swift */,
 				C04C3CA724DD608F00F7C52B /* Repository.swift */,
-				C04C3CBB24DD792300F7C52B /* Cars.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -164,6 +171,15 @@
 			path = Cache;
 			sourceTree = "<group>";
 		};
+		C04C3CD124DDC6DF00F7C52B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C04C3CBB24DD792300F7C52B /* Cars.swift */,
+				C04C3CD224DDC6F400F7C52B /* Route.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -183,6 +199,7 @@
 			name = Cars;
 			packageProductDependencies = (
 				C04C3CAC24DD6A1000F7C52B /* Alamofire */,
+				C04C3CD724DDD30F00F7C52B /* Polyline */,
 			);
 			productName = Cars;
 			productReference = C04C3C8124DD357A00F7C52B /* Cars.app */;
@@ -214,6 +231,7 @@
 			mainGroup = C04C3C7824DD357A00F7C52B;
 			packageReferences = (
 				C04C3CAB24DD6A1000F7C52B /* XCRemoteSwiftPackageReference "Alamofire" */,
+				C04C3CD624DDD30F00F7C52B /* XCRemoteSwiftPackageReference "Polyline" */,
 			);
 			productRefGroup = C04C3C8224DD357A00F7C52B /* Products */;
 			projectDirPath = "";
@@ -244,6 +262,8 @@
 				C04C3C8924DD357A00F7C52B /* MapViewController.swift in Sources */,
 				C04C3C8524DD357A00F7C52B /* AppDelegate.swift in Sources */,
 				C04C3CBF24DD7BBA00F7C52B /* CacheLifeTimeEntity+CoreDataClass.swift in Sources */,
+				C04C3CD524DDD14600F7C52B /* PolylineController.swift in Sources */,
+				C04C3CD324DDC6F400F7C52B /* Route.swift in Sources */,
 				C04C3CBC24DD792300F7C52B /* Cars.swift in Sources */,
 				C04C3CBA24DD787D00F7C52B /* Cache.swift in Sources */,
 				C04C3CB324DD73FC00F7C52B /* Cars.xcdatamodeld in Sources */,
@@ -464,6 +484,14 @@
 				minimumVersion = 5.2.2;
 			};
 		};
+		C04C3CD624DDD30F00F7C52B /* XCRemoteSwiftPackageReference "Polyline" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/raphaelmor/Polyline.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -471,6 +499,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C04C3CAB24DD6A1000F7C52B /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		C04C3CD724DDD30F00F7C52B /* Polyline */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C04C3CD624DDD30F00F7C52B /* XCRemoteSwiftPackageReference "Polyline" */;
+			productName = Polyline;
 		};
 /* End XCSwiftPackageProductDependency section */
 
