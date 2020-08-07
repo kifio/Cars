@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C043665124DDEFE800DFD8FC /* CarDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043664F24DDEFE800DFD8FC /* CarDetailsViewController.swift */; };
+		C043665224DDEFE800DFD8FC /* CarDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C043665024DDEFE800DFD8FC /* CarDetailsViewController.xib */; };
+		C043665424DDF96800DFD8FC /* CarDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043665324DDF96800DFD8FC /* CarDetailsPresenter.swift */; };
+		C043665624DDFCF100DFD8FC /* CarDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C043665524DDFCF100DFD8FC /* CarDetailsInteractor.swift */; };
 		C04C3C8524DD357A00F7C52B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3C8424DD357A00F7C52B /* AppDelegate.swift */; };
 		C04C3C8924DD357A00F7C52B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C3C8824DD357A00F7C52B /* MapViewController.swift */; };
 		C04C3C8E24DD358100F7C52B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C04C3C8D24DD358100F7C52B /* Assets.xcassets */; };
@@ -49,6 +53,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C043664F24DDEFE800DFD8FC /* CarDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsViewController.swift; sourceTree = "<group>"; };
+		C043665024DDEFE800DFD8FC /* CarDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarDetailsViewController.xib; sourceTree = "<group>"; };
+		C043665324DDF96800DFD8FC /* CarDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsPresenter.swift; sourceTree = "<group>"; };
+		C043665524DDFCF100DFD8FC /* CarDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsInteractor.swift; sourceTree = "<group>"; };
 		C04C3C8124DD357A00F7C52B /* Cars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C04C3C8424DD357A00F7C52B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C04C3C8824DD357A00F7C52B /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +96,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C043664624DDE14B00DFD8FC /* CarDetails */ = {
+			isa = PBXGroup;
+			children = (
+				C043664F24DDEFE800DFD8FC /* CarDetailsViewController.swift */,
+				C043665024DDEFE800DFD8FC /* CarDetailsViewController.xib */,
+				C043665324DDF96800DFD8FC /* CarDetailsPresenter.swift */,
+				C043665524DDFCF100DFD8FC /* CarDetailsInteractor.swift */,
+			);
+			path = CarDetails;
+			sourceTree = "<group>";
+		};
 		C04C3C7824DD357A00F7C52B = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +126,7 @@
 		C04C3C8324DD357A00F7C52B /* Cars */ = {
 			isa = PBXGroup;
 			children = (
+				C043664624DDE14B00DFD8FC /* CarDetails */,
 				C04C3C9224DD358100F7C52B /* Info.plist */,
 				C04C3CB024DD73E600F7C52B /* SupportFiles */,
 				C04C3C9B24DD3F6A00F7C52B /* ThirdParty */,
@@ -249,6 +269,7 @@
 			files = (
 				C04C3C9124DD358100F7C52B /* LaunchScreen.storyboard in Resources */,
 				C04C3C8E24DD358100F7C52B /* Assets.xcassets in Resources */,
+				C043665224DDEFE800DFD8FC /* CarDetailsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,9 +283,12 @@
 				C04C3C8924DD357A00F7C52B /* MapViewController.swift in Sources */,
 				C04C3C8524DD357A00F7C52B /* AppDelegate.swift in Sources */,
 				C04C3CBF24DD7BBA00F7C52B /* CacheLifeTimeEntity+CoreDataClass.swift in Sources */,
+				C043665624DDFCF100DFD8FC /* CarDetailsInteractor.swift in Sources */,
 				C04C3CD524DDD14600F7C52B /* PolylineController.swift in Sources */,
 				C04C3CD324DDC6F400F7C52B /* Route.swift in Sources */,
 				C04C3CBC24DD792300F7C52B /* Cars.swift in Sources */,
+				C043665424DDF96800DFD8FC /* CarDetailsPresenter.swift in Sources */,
+				C043665124DDEFE800DFD8FC /* CarDetailsViewController.swift in Sources */,
 				C04C3CBA24DD787D00F7C52B /* Cache.swift in Sources */,
 				C04C3CB324DD73FC00F7C52B /* Cars.xcdatamodeld in Sources */,
 				C04C3CC224DD956F00F7C52B /* MapInteractor.swift in Sources */,

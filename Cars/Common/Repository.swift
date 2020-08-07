@@ -23,6 +23,7 @@ class Repository {
     
     private let cache = Cache()
     
+//    MARK: - Fetch cars
     func fetchCars(onCarsFetched: @escaping ([Car]) -> ()) {
         AF.request(Repository.carsUrl).responseData { response in
             if let err = response.error {
@@ -44,6 +45,7 @@ class Repository {
         }
     }
     
+//    MARK: - Fetch route
     func fetchRoute(
         from: LonLat,
         to: LonLat,
@@ -76,6 +78,16 @@ class Repository {
             }
         } catch let err {
             print(err)
+        }
+    }
+    
+//   MARK: - Download image
+    func downloadImage(urlString: String,
+                       onImageDownloaded: @escaping (_ response: Data) -> Void) {
+        AF.request(urlString).response { response in
+            if let data = response.data {
+                onImageDownloaded(data)
+            }
         }
     }
 }

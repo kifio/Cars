@@ -57,29 +57,51 @@ class MapViewController: UIViewController {
 extension MapViewController {
     
     @objc func handleMapTap(sender: UITapGestureRecognizer) {
-        // Get the CGPoint where the user tapped.
         let spot = sender.location(in: mapView)
-        
-        // Access the features at that point within the state layer.
         let features = mapView.visibleFeatures(at: spot, styleLayerIdentifiers: Set([Constants.layer]))
-        
-        // Get the name of the selected state.
-        if let feature = features.first, let userLocation = self.userLocation?.location {
-            self.presenter.showRoute(
-                fromLon: userLocation.coordinate.longitude,
-                fromLat: userLocation.coordinate.latitude,
-                toLon: feature.coordinate.longitude,
-                toLat: feature.coordinate.latitude,
-                completion: { [weak self] routeViewModel in
-                    guard let style = self?.mapView.style else { return }
-                    self?.animateCamera(polyline: routeViewModel.polyline)
-                    DispatchQueue.main.async(execute: {
-                        self?.polylineController.lineCoordinates = routeViewModel.polyline
-                        self?.polylineController.addPolyline(to: style)
-                        self?.polylineController.animatePolyline()
-                    })
-            })
+        if let feature = features.first,
+            let userLocation = self.userLocation?.location?.coordinate,
+            let id = feature.attribute(forKey: Constants.id) as? Int {
+            self.showCarDetail(carId: id)
+            self.showRoute(from: userLocation, to: feature.coordinate)
+        } else {
+            self.dismiss()
         }
+    }
+    
+    private func showCarDetail(carId: Int) {
+        self.presenter.showDetails(target: self, id: carId, completion: { detailsHeight in
+            var frame = self.mapView.frame
+            frame.size = CGSize(width: frame.width, height: frame.height - detailsHeight)
+            self.mapView.frame = frame
+        })
+    }
+    
+    private func showRoute(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D) {
+        self.presenter.showRoute(
+            fromLon: from.longitude,
+            fromLat: from.latitude,
+            toLon: to.longitude,
+            toLat: to.latitude,
+            completion: { [weak self] routeViewModel in
+                guard let style = self?.mapView.style else { return }
+                DispatchQueue.main.async(execute: {
+                    self?.animateCamera(polyline: routeViewModel.polyline)
+                    self?.polylineController.addPolyline(routeViewModel.polyline, to: style)
+                    self?.polylineController.animatePolyline()
+                })
+        })
+    }
+    
+    private func dismiss() {
+        guard let style = self.mapView.style else { return }
+        self.polylineController.clear(style)
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            if let controller = self {
+                controller.mapView.frame = controller.view.frame
+            }
+        }
+        self.presenter.removeDetailsViewController(target: self)
     }
     
     private func animateCamera(polyline: [CLLocationCoordinate2D]) {
@@ -99,18 +121,21 @@ extension MapViewController {
                 return loc0.longitude < loc1.longitude
             })?.longitude {
             
-            
-            let bounds: MGLCoordinateBounds = MGLCoordinateBounds(
+            let targetbounds: MGLCoordinateBounds = MGLCoordinateBounds(
                 sw: CLLocationCoordinate2D(latitude: south, longitude: west),
                 ne: CLLocationCoordinate2D(latitude: north, longitude: east))
             
             let inset: CGFloat = 24.0
-            let padding = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+            let padding = UIEdgeInsets(
+                top: inset,
+                left: inset,
+                bottom: inset,
+                right: inset
+            )
             
-            DispatchQueue.main.async(execute: {
-                let camera = self.mapView.cameraThatFitsCoordinateBounds(bounds, edgePadding: padding)
-                self.mapView.setCamera(camera, animated: true)
-            })
+            let camera = self.mapView.cameraThatFitsCoordinateBounds(targetbounds, edgePadding: padding)
+            
+            self.mapView.setCamera(camera, animated: true)
         }
     }
 }
@@ -157,17 +182,22 @@ extension MapViewController {
         static let layer = "cars-layer"
         static let color = "color"
         static let rotation = "rotation"
+        static let id = "id"
     }
     
     func addItemsToMap(_ mapView: MGLMapView, _ cars: [CarViewModel]) {
         guard let style = mapView.style else { return }
         
         if style.image(forName: Constants.blue) == nil {
-            style.setImage(UIImage(named: Constants.blue)!, forName: Constants.blue)
+            DispatchQueue.main.async(execute: {
+                style.setImage(UIImage(named: Constants.blue)!, forName: Constants.blue)
+            })
         }
         
         if style.image(forName: Constants.black) == nil {
-            style.setImage(UIImage(named: Constants.black)!, forName: Constants.black)
+            DispatchQueue.main.async(execute: {
+                style.setImage(UIImage(named: Constants.black)!, forName: Constants.black)
+            })
         }
         
         let features = mapToFeatures(cars)
@@ -216,6 +246,7 @@ extension MapViewController {
             feature.coordinate = coordinate
             
             feature.attributes = [
+                Constants.id: car.id,
                 Constants.rotation: car.angle,
                 Constants.color: car.color
             ]

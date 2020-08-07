@@ -6,9 +6,29 @@
 //  Copyright © 2020 Ivan Murashov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Polyline
 import CoreLocation
+
+struct CarViewModel {
+    let id: Int
+    let color: String
+    let angle: Int
+    let latitude: Double
+    let longitude: Double
+    
+    init(car: Car) {
+        self.id = car.id
+        self.color = car.color
+        self.angle = car.angle
+        self.latitude = car.latitude
+        self.longitude = car.longitude
+    }
+}
+
+struct RouteViewModel {
+    let polyline: [CLLocationCoordinate2D]
+}
 
 protocol MapPresenter {
     func showCars(
@@ -25,25 +45,9 @@ protocol MapPresenter {
         toLat: Double,
         completion: @escaping (RouteViewModel) -> Void)
     
-    func showDetails()
-}
-
-struct CarViewModel {
-    let color: String
-    let angle: Int
-    let latitude: Double
-    let longitude: Double
+    func showDetails(target: UIViewController, id: Int, completion: @escaping (CGFloat) -> Void)
     
-    init(car: Car) {
-        self.color = car.color
-        self.angle = car.angle
-        self.latitude = car.latitude
-        self.longitude = car.longitude
-    }
-}
-
-struct RouteViewModel {
-    let polyline: [CLLocationCoordinate2D]
+    func removeDetailsViewController(target: UIViewController)
 }
 
 class MapPresenterImpl: MapPresenter {
@@ -99,7 +103,13 @@ class MapPresenterImpl: MapPresenter {
         }
     }
     
-    func showDetails() {
-        
+    func showDetails(target: UIViewController, id: Int, completion: @escaping (CGFloat) -> Void) {
+        if let car = self.interactor.findCar(id: id) {
+            self.router.showDetails(target, car, completion)
+        }
+    }
+    
+    func removeDetailsViewController(target: UIViewController) {
+        self.router.removeDetailsViewController(target)
     }
 }

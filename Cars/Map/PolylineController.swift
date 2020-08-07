@@ -21,14 +21,21 @@ class PolyLineController {
     private var polylineSource: MGLShapeSource?
     private var currentIndex: Int = 1
     
-    var lineCoordinates: [CLLocationCoordinate2D]!
-
-    func addPolyline(to style: MGLStyle) {
+    var lineCoordinates: [CLLocationCoordinate2D]?
+    
+    func clear(_ style: MGLStyle) {
+        self.lineCoordinates?.removeAll()
+        self.polylineSource?.shape = nil
+    }
+    
+    func addPolyline(_ lineCoordinates: [CLLocationCoordinate2D], to style: MGLStyle) {
         
+        self.lineCoordinates = lineCoordinates
+
         if polylineSource == nil {
             let source = MGLShapeSource(identifier: Constants.polyline, shape: nil, options: nil)
             style.addSource(source)
-            polylineSource = source
+            self.polylineSource = source
         }
         
         if style.layer(withIdentifier: Constants.polyline) == nil, let source = polylineSource {
@@ -43,23 +50,23 @@ class PolyLineController {
     }
     
     func animatePolyline() {
-        currentIndex = 1
-        timer = Timer.scheduledTimer(timeInterval: Constants.timeInterval, target: self, selector: #selector(tick), userInfo: nil, repeats: true)
+        self.currentIndex = 1
+        self.timer = Timer.scheduledTimer(timeInterval: Constants.timeInterval, target: self, selector: #selector(tick), userInfo: nil, repeats: true)
     }
     
     @objc func tick() {
-        if currentIndex > lineCoordinates.count {
-            timer?.invalidate()
-            timer = nil
+        if let lineCoordinates = self.lineCoordinates, currentIndex <= lineCoordinates.count {
+            self.updatePolylineWithCoordinates(coordinates: Array(lineCoordinates[0..<currentIndex]))
+            self.currentIndex += 1
+        } else {
+            self.timer?.invalidate()
+            self.timer = nil
             return
         }
-        
-        updatePolylineWithCoordinates(coordinates: Array(lineCoordinates[0..<currentIndex]))
-        currentIndex += 1
     }
     
     func updatePolylineWithCoordinates(coordinates: [CLLocationCoordinate2D]) {
         var mutableCoordinates = coordinates
-        polylineSource?.shape = MGLPolylineFeature(coordinates: &mutableCoordinates, count: UInt(mutableCoordinates.count))
+        self.polylineSource?.shape = MGLPolylineFeature(coordinates: &mutableCoordinates, count: UInt(mutableCoordinates.count))
     }
 }

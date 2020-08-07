@@ -24,6 +24,8 @@ protocol MapInteractor {
         toLat: Double,
         completion: @escaping (Route) -> Void
     )
+    
+    func findCar(id: Int) -> Car?
 }
 
 class MapInteractorImpl: MapInteractor {
@@ -57,6 +59,12 @@ class MapInteractorImpl: MapInteractor {
             from: (fromLon, fromLat),
             to: (toLon, toLat),
             onRouteFounded: completion)
+    }
+    
+    func findCar(id: Int) -> Car? {
+        return self.cars.first(where: { car in
+            car.id == id
+        })
     }
     
     private func fetchCars() {
