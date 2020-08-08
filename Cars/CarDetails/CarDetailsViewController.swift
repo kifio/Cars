@@ -55,7 +55,7 @@ class CarDetailsViewController: UIViewController {
             
             self?.view.frame = CGRect(x: 0.0, y: offset, width: frame.width, height: height)
             }, completion: { [weak self]  _ in
-                self?.onPresented?(offset)
+                self?.onPresented?(height)
         })
     }
     

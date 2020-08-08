@@ -59,13 +59,18 @@ extension MapViewController {
     @objc func handleMapTap(sender: UITapGestureRecognizer) {
         let spot = sender.location(in: mapView)
         let features = mapView.visibleFeatures(at: spot, styleLayerIdentifiers: Set([Constants.layer]))
-        if let feature = features.first,
-            let userLocation = self.userLocation?.location?.coordinate,
-            let id = feature.attribute(forKey: Constants.id) as? Int {
-            self.showCarDetail(carId: id)
-            self.showRoute(from: userLocation, to: feature.coordinate)
-        } else {
-            self.dismiss()
+        
+        guard let feature = features.first,
+            let id = feature.attribute(forKey: Constants.id) as? Int else {
+                self.removeCarDetails(completion: nil)
+                return
+        }
+        
+        self.removeCarDetails { [weak self] _ in
+            self?.showCarDetail(carId: id)
+            if let userLocation = self?.userLocation?.location?.coordinate {
+                self?.showRoute(from: userLocation, to: feature.coordinate)
+            }
         }
     }
     
@@ -93,14 +98,14 @@ extension MapViewController {
         })
     }
     
-    private func dismiss() {
+    private func removeCarDetails(completion: ((Bool) -> Void)?) {
         guard let style = self.mapView.style else { return }
         self.polylineController.clear(style)
-        UIView.animate(withDuration: 0.3) { [weak self] in
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
             if let controller = self {
                 controller.mapView.frame = controller.view.frame
             }
-        }
+        }, completion: completion)
         self.presenter.removeDetailsViewController(target: self)
     }
     
